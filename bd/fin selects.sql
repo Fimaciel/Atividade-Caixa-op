@@ -131,7 +131,7 @@ SELECT * FROM servicos;
  Select nome from caixas as c inner join funcionarios as f on c.func_fk = f.id;
   select * from servicos;
   
-  
+  select * from clientes where nome = 'filipe';
   
 
 

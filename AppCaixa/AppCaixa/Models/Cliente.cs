@@ -7,5 +7,5 @@ public class Cliente
     public string cpf { get; set; }
     public string email { get; set; }
     public string telefone { get; set; }
-    public DateOnly data_nasc { get; set; }
+    public DateTime data_nasc { get; set; }
 }
