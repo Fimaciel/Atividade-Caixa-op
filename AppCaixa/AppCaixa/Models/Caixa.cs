@@ -9,5 +9,7 @@ public class Caixa
     public string status_caixa { get; set; }
     public int func_fk { get; set; }
     public decimal saldo_total { get; set; }
-}
 
+    public string funcionario_nome { get; set; }
+    
+}

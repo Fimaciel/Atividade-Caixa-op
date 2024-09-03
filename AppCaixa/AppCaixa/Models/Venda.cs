@@ -9,5 +9,5 @@ public class Venda
     public decimal desconto { get; set; }
     public decimal valor_final { get; set; }
     public string tipo { get; set; }
-    public int id_cliente_fk { get; set; }
+    public int? id_cliente_fk  { get; set; }
 }

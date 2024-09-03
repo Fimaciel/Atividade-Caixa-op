@@ -1,6 +1,6 @@
 INSERT INTO funcionarios(nome, cpf) VALUES ("Lucas","9032213022");
 INSERT INTO funcionarios(nome, cpf) VALUES ("João","12345678912");
-
+select * from funcionarios;
 
 INSERT INTO servicos(valor, descricao, tempo) VALUES (100.20, 'arrumar pc', '01:40:00');
 INSERT INTO servicos(valor, descricao, tempo) VALUES (100, 'arrumar placa mãe', '01:20:00');

@@ -1,13 +1,29 @@
-﻿
-using AppCaixa.Models;
-using AppCaixa.view;
+﻿using AppCaixa.view;
 
-// ClienteView.menu();
+bool running = true;
 
-// FuncionarioView.menu();
+while (running)
+{
+    Console.WriteLine("Menu Principal:");
+    Console.WriteLine("1. Gerenciar Caixa");
+    Console.WriteLine("2. Gerenciar Funcionário");
+    Console.WriteLine("3. Sair");
 
-// FornecedorView.menu();
+    string opcao = Console.ReadLine();
 
-// DispositivoView.Menu();
-
-ServicoView.menu();
+    switch (opcao)
+    {
+        case "1":
+            CaixaView.menu();
+            break;
+        case "2":
+            FuncionarioView.menu();
+            break;
+        case "3":
+            running = false;
+            break;
+        default:
+            Console.WriteLine("Opção inválida, tente novamente.");
+            break;
+    }
+}
