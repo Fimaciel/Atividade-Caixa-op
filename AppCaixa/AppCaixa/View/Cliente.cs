@@ -6,9 +6,9 @@ using AppCaixa.Models;
 using System.Collections.Generic;
 using AppCaixa.Helpers;
 
-class ClienteView()
+public static class ClienteView
 {
-    public static void principal()
+    public static void menu()
     {
         ClienteDAO clienteDAO = new ClienteDAO();
         bool running = true;
@@ -56,8 +56,22 @@ class ClienteView()
         cliente.nome = Console.ReadLine();
 
         Console.Write("CPF: ");
-        cliente.cpf = Console.ReadLine();
+        bool cpfValido = true;
+        while (cpfValido)
+        {
+            Console.Write("Novo CPF: ");
+            cliente.cpf = Helpers.LimparCPF(Console.ReadLine());
 
+            if (!Helpers.ValidarCpf(cliente.cpf))
+            {
+                Console.WriteLine("Informe um cpf Válido!");
+            }
+            else
+            {
+                cpfValido = false;
+            }
+        }
+        
         Console.Write("Email: ");
         cliente.email = Console.ReadLine();
 

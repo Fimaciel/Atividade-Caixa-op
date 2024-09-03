@@ -1,7 +1,13 @@
 ﻿
+using AppCaixa.Models;
 using AppCaixa.view;
 
-ClienteView.principal();
+// ClienteView.menu();
 
+// FuncionarioView.menu();
 
+// FornecedorView.menu();
 
+// DispositivoView.Menu();
+
+ServicoView.menu();

@@ -94,8 +94,9 @@ public static class Helpers
         return false;
     }
 
-    static string LimparCPF(string cpf)
+    public static string LimparCPF(string cpf)
     {
+        
         cpf = cpf.Replace(".", "").Replace("-", "");
         
         return cpf;

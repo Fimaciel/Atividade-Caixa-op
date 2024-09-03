@@ -50,95 +50,99 @@ public class ClienteDAO
         }
     }
 
-     public List<Cliente> Listar()
+    public List<Cliente> Listar()
+    {
+        List<Cliente> listaClientes = new List<Cliente>();
+
+        try
         {
-            List<Cliente> listaClientes = new List<Cliente>();
+            string sqlList = "SELECT * FROM clientes";
+            MySqlCommand command = new MySqlCommand(sqlList, Conexao.Conectar());
+            MySqlDataReader reader = command.ExecuteReader();
 
-            try
+            while (reader.Read())
             {
-                string sqlList = "SELECT * FROM clientes";
-                MySqlCommand command = new MySqlCommand(sqlList, Conexao.Conectar());
-                MySqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
+                Cliente cliente = new Cliente
                 {
-                    Cliente cliente = new Cliente
-                    {
-                        id = reader.GetInt32("id"),
-                        nome = reader.GetString("nome"),
-                        cpf = reader.GetString("cpf"),
-                        email = reader.GetString("email"),
-                        telefone = reader.GetString("telefone"),
-                        data_nasc = reader.GetDateTime("data_nasc")
-                    };
-                    listaClientes.Add(cliente);
-                }
-                reader.Close();
-                Conexao.FecharConexao();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
+                    id = reader.GetInt32("id"),
+                    nome = reader.GetString("nome"),
+                    cpf = reader.GetString("cpf"),
+                    email = reader.GetString("email"),
+                    telefone = reader.GetString("telefone"),
+                    data_nasc = reader.GetDateTime("data_nasc")
+                };
+                listaClientes.Add(cliente);
             }
 
-            return listaClientes;
+            reader.Close();
+            Conexao.FecharConexao();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
         }
 
-        public void Update(Cliente cliente)
+        return listaClientes;
+    }
+
+    public void Update(Cliente cliente)
+    {
+        try
         {
-            try
+            List<string> updates = new List<string>();
+            MySqlCommand command = new MySqlCommand();
+            command.Connection = Conexao.Conectar();
+
+            if (!string.IsNullOrEmpty(cliente.nome))
             {
-                List<string> updates = new List<string>();
-                MySqlCommand command = new MySqlCommand();
-                command.Connection = Conexao.Conectar();
-
-                if (!string.IsNullOrEmpty(cliente.nome))
-                {
-                    updates.Add("nome = @nome");
-                    command.Parameters.AddWithValue("@nome", cliente.nome);
-                }
-                if (!string.IsNullOrEmpty(cliente.cpf))
-                {
-                    updates.Add("cpf = @cpf");
-                    command.Parameters.AddWithValue("@cpf", cliente.cpf);
-                }
-                if (!string.IsNullOrEmpty(cliente.email))
-                {
-                    updates.Add("email = @email");
-                    command.Parameters.AddWithValue("@email", cliente.email);
-                }
-                if (!string.IsNullOrEmpty(cliente.telefone))
-                {
-                    updates.Add("telefone = @telefone");
-                    command.Parameters.AddWithValue("@telefone", cliente.telefone);
-                }
-                if (cliente.data_nasc != DateTime.MinValue)
-                {
-                    updates.Add("data_nasc = @dataNasc");
-                    command.Parameters.AddWithValue("@dataNasc", cliente.data_nasc.ToString("yyyy-MM-dd"));
-                }
-
-                if (updates.Count > 0)
-                {
-                    string updateSql = $"UPDATE clientes SET {string.Join(", ", updates)} WHERE id = @id";
-                    command.CommandText = updateSql;
-                    command.Parameters.AddWithValue("@id", cliente.id);
-                    command.ExecuteNonQuery();
-                    Console.WriteLine("Cliente atualizado com sucesso!");
-                }
-                else
-                {
-                    Console.WriteLine("Nenhuma atualização realizada.");
-                }
-
-                Conexao.FecharConexao();
+                updates.Add("nome = @nome");
+                command.Parameters.AddWithValue("@nome", cliente.nome);
             }
-            catch (Exception e)
+
+            if (!string.IsNullOrEmpty(cliente.cpf))
             {
-                Console.WriteLine(e);
-                throw;
+                updates.Add("cpf = @cpf");
+                command.Parameters.AddWithValue("@cpf", cliente.cpf);
             }
+
+            if (!string.IsNullOrEmpty(cliente.email))
+            {
+                updates.Add("email = @email");
+                command.Parameters.AddWithValue("@email", cliente.email);
+            }
+
+            if (!string.IsNullOrEmpty(cliente.telefone))
+            {
+                updates.Add("telefone = @telefone");
+                command.Parameters.AddWithValue("@telefone", cliente.telefone);
+            }
+
+            if (cliente.data_nasc != DateTime.MinValue)
+            {
+                updates.Add("data_nasc = @dataNasc");
+                command.Parameters.AddWithValue("@dataNasc", cliente.data_nasc.ToString("yyyy-MM-dd"));
+            }
+
+            if (updates.Count > 0)
+            {
+                string updateSql = $"UPDATE clientes SET {string.Join(", ", updates)} WHERE id = @id";
+                command.CommandText = updateSql;
+                command.Parameters.AddWithValue("@id", cliente.id);
+                command.ExecuteNonQuery();
+                Console.WriteLine("Cliente atualizado com sucesso!");
+            }
+            else
+            {
+                Console.WriteLine("Nenhuma atualização realizada.");
+            }
+
+            Conexao.FecharConexao();
         }
-
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
 }
