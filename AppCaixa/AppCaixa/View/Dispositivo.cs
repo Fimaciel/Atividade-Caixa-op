@@ -2,8 +2,7 @@ using System;
 using AppCaixa.DAO;
 using AppCaixa.Models;
 
-namespace AppCaixa.view
-{
+namespace AppCaixa.view;
     public static class DispositivoView
     {
         public static void Menu()
@@ -114,4 +113,4 @@ namespace AppCaixa.view
             dispositivoDao.Delete(dispositivo);
         }
     }
-}
+

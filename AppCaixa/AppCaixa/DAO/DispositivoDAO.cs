@@ -2,8 +2,7 @@ using AppCaixa.database;
 using AppCaixa.Models;
 using MySql.Data.MySqlClient;
 
-namespace AppCaixa.DAO
-{
+namespace AppCaixa.DAO;
     public class DispositivoDAO
     {
         public void Insert(Dispositivo dispositivo)
@@ -124,4 +123,3 @@ namespace AppCaixa.DAO
             }
         }
     }
-}

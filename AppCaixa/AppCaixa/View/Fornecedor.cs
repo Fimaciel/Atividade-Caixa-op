@@ -4,7 +4,6 @@ using System;
 using AppCaixa.DAO;
 using AppCaixa.Models;
 using System.Collections.Generic;
-using AppCaixa.Helpers;
 
 public static class FornecedorView
 {
