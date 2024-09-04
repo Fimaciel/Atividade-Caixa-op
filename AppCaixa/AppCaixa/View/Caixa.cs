@@ -86,6 +86,7 @@ public static class CaixaView
     public static void Atualizar(CaixaDAO caixaDao)
     {
         Caixa caixa = new Caixa();
+        FuncionarioDAO f = new FuncionarioDAO();
 
         Console.Write("ID do Caixa a ser atualizado: ");
         caixa.id = int.Parse(Console.ReadLine());
@@ -118,9 +119,10 @@ public static class CaixaView
             caixa.status_caixa = Console.ReadLine();
         }
 
-        Console.WriteLine("Deseja atualizar o ID do Funcionário? (S/N)");
+        Console.WriteLine("Deseja atualizar o Funcionário? (S/N)");
         if (Console.ReadLine().Trim().ToUpper() == "S")
         {
+            FuncionarioView.Listar(f);
             Console.Write("Novo ID do Funcionário: ");
             caixa.func_fk = int.Parse(Console.ReadLine());
         }
