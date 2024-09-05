@@ -1,6 +1,7 @@
 create database financeiroDB;
 use financeiroDB;
 
+
 -- tabelas
 CREATE TABLE funcionarios(
 	id INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -119,5 +120,8 @@ ALTER TABLE recebimentos CHANGE data_pagamento  data_pagamento DATE;
 ALTER TABLE despesas ADD fornecedor_fk INTEGER;
 ALTER TABLE despesas ADD foreign key (fornecedor_fk) REFERENCES fornecedores(id);
  
-
+INSERT INTO fornecedores (razao_social, nome_fantasia, ativo, atividade_economica, telefone, email)
+VALUES 
+('Empresa ABC Ltda', 'ABC Produtos', TRUE, 'Comércio de Produtos Alimentícios', '(11) 98765-4321', 'contato@abcprodutos.com'),
+('Tech Solutions S.A.', 'Tech Soluções', TRUE, 'Desenvolvimento de Software', '(21) 12345-6789', 'vendas@techsolucoes.com');
 
